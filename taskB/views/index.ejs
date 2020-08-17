@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My books checklist</title>
+  <link rel="stylesheet" href="../style/main.css">
+</head>
+<body>
+  <h1> Các sách sẽ đọc trong năm nay </h1>
+    <ul class="books">
+        <% for(var i = 0; i < books.length; i++) {%>
+          <li class="book">
+            <span>Name: <%= books[i].bookName %></span>
+            <span>Author: <%= books[i].authorName %></span>
+            <span>Đã hoàn thành: <%= books[i].archived %></span>
+            <form action="/archive" method="POST" style="display: inline;">
+                <input style="display: none;" type="text" name="bookID" value=<%=books[i]._id%>>
+                <button type="submit">Hoàn thành</button>
+            </form>
+          </li>
+        <% } %>
+      </ul>
+  <form action="/submitbook" method="POST">
+    <h3>Thêm sách</h3>
+    <input type="text" placeholder="Tiêu đề" name="bookName" min=8 max=32 pattern="[A-Za-z]" required>
+    <input type="text" placeholder="Tác giả" name="authorName" min=8 max=32 pattern="[A-Za-z]" required>
+    <button type="submit">Nhập</button>
+  </form>
+  <form action="/submitauthor" method="POST"> 
+    <h3>Thêm tác giả</h3>
+    <input type="text" placeholder="Tên tác giả" name="authorName" min=8 max=32 pattern="[A-Za-z]" required>
+    <button type="submit">Nhập</button>
+  </form>
+</body>
+</html>
